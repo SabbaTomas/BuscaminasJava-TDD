@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Buscaminas {
 
     private Boolean tablero[][];
@@ -14,7 +16,7 @@ public class Buscaminas {
         }
         Integer numeroAleatorioUno;
         Integer numeroAleatorioDos;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 99; i++) {
             numeroAleatorioUno = (int) (Math.random() * 9 + 1);
             numeroAleatorioDos = (int) (Math.random() * 9 + 1);
             this.tablero[numeroAleatorioUno][numeroAleatorioDos] = true;
@@ -112,4 +114,21 @@ public class Buscaminas {
         return cantidadDeMinasAlrededor;
     }
 
+    public static void main(String[] args){
+        Integer filaSeleccion;
+        Integer columnaSeleccion;
+        Buscaminas juego = new Buscaminas(10, 10);
+        juego.iniciarJuego();
+        Scanner teclado = new Scanner(System.in);
+        
+        
+        filaSeleccion = teclado.nextInt();
+        columnaSeleccion = teclado.nextInt();
+        if(juego.seleccionarCasillaVaciaYQueDevuelvaFalse(filaSeleccion, columnaSeleccion)){
+            System.out.println("perdiste");
+        } else {
+            Integer resultado = juego.retornarCuantasMinasHayAlrededor(filaSeleccion, columnaSeleccion);
+            System.out.println(resultado);
+        }
+    }
 }
